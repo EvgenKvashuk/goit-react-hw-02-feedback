@@ -56,13 +56,12 @@
 
 .stat {
     display: flex;
-    flex-direction: column;
     color: wheat;
     border: 2px solid purple;
     border-radius: 6px;
-    flex-direction: column;
     padding: 0 10px;
     width: 210px;
+    justify-content: space-between;
 }
 
 .wraper {
