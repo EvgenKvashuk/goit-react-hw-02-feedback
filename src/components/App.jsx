@@ -41,8 +41,6 @@ class App extends Component {
   // =====================================================================================================================
   render() {
 
-    const options = Object.keys(this.state);
-
     return (
       <>
         <FeedbackOptions
