@@ -55,7 +55,7 @@ class App extends Component {
         </Section>
 
         <Section title="Statistics">
-          {(this.state.good + this.state.neutral + this.state.bad) != 0 ?
+          {(this.state.good + this.state.neutral + this.state.bad) !== 0 ?
             <Statistics
               good={this.state.good}
               neutral={this.state.neutral}
