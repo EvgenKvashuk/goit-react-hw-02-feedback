@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import FeedbackOptions from "./FeedbackOptions";
 import Statistics from "./Statistics";
+import Notification from "./Notification/Notification";
+import Section from "./Section/Section";
 
 class App extends Component {
   state = {
@@ -33,7 +35,7 @@ class App extends Component {
   // =================================================================================================================
   // counting
   countTotalFeedback = () => {
-   
+
   }
 
   // countPositiveFeedbackPercentage()
@@ -43,17 +45,24 @@ class App extends Component {
 
     return (
       <>
-        <FeedbackOptions
-          // options={options}
-          onLeaveFeedback={[this.handleIncrmGood, this.handleIncrmNeutral, this.handleIncrmBad]}
-        />
-        {this.state.good + this.state.neutral + this.state.bad >0 && <Statistics
-          good={this.state.good}
-          neutral={this.state.neutral}
-          bad={this.state.bad}
-          total={this.state.good + this.state.neutral + this.state.bad}
-          positivePercentage={Math.round((this.state.good / (this.state.good + this.state.neutral + this.state.bad)) * 100)}
-        />}
+        <Section title="Please leave feedback">
+          <FeedbackOptions
+            // options={options}
+            onLeaveFeedback={[this.handleIncrmGood, this.handleIncrmNeutral, this.handleIncrmBad]}
+          />
+        </Section>
+
+        <Section title="Statistics">
+          {(this.state.good + this.state.neutral + this.state.bad) != 0 ?
+            <Statistics
+              good={this.state.good}
+              neutral={this.state.neutral}
+              bad={this.state.bad}
+              total={this.state.good + this.state.neutral + this.state.bad}
+              positivePercentage={Math.round((this.state.good / (this.state.good + this.state.neutral + this.state.bad)) * 100)}
+            />
+            : <Notification message="There is no feedback"></Notification>}
+        </Section>
       </>
     );
   };

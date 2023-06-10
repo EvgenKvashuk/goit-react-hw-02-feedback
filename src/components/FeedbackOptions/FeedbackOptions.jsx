@@ -39,10 +39,8 @@ import css from './FeedbackOptions.module.css'
 const FeedbackOptions = ({onLeaveFeedback}) =>  {
         return (
             <div>
-
                 <div className={css.wraper_btn}>
-                    <h2 className={css.header}>Please leave feedback</h2>
-
+                    
                     <ul className={css.list_btn}>
                         <li >
                             <button className={css.button} type="button" onClick={onLeaveFeedback[0]}>Good</button>
