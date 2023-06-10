@@ -4,6 +4,7 @@ import Statistics from "./Statistics";
 import Notification from "./Notification/Notification";
 import Section from "./Section/Section";
 
+
 class App extends Component {
   state = {
     good: 0,
