@@ -14,54 +14,47 @@ class App extends Component {
   }
 
   // =====================================================================================================================
-  // custom methods
-  handleIncrmGood = () => {
+  // custom method
+  handleIncrm = (option) => {
     this.setState(preventState => ({
-      good: preventState.good + 1,
+      [option]: preventState[option] + 1,
     }))
-    console.log('1')
   };
 
-  handleIncrmNeutral = () => {
-    this.setState(preventState => ({
-      neutral: preventState.neutral + 1,
-    }))
-    console.log('2')
-  };
-
-  handleIncrmBad = () => {
-    this.setState(preventState => ({
-      bad: preventState.bad + 1,
-    }))
-  };
   // =================================================================================================================
   // counting
   countTotalFeedback = () => {
-
-  }
-
-  // countPositiveFeedbackPercentage()
+    const total = Object.values(this.state);
+    return total.reduce((acc, vote) => vote + acc, 0);
+  };
+  
+  countPositiveFeedbackPercentage = (total) => {
+    const countPositive = Math.round((this.state.good / total) * 100);
+    return countPositive;
+  };
 
   // =====================================================================================================================
   render() {
+    const total = this.countTotalFeedback();
+    const positive = this.countPositiveFeedbackPercentage(total);
 
     return (
       <>
         <Section title="Please leave feedback">
           <FeedbackOptions
-            // options={options}
-            onLeaveFeedback={[this.handleIncrmGood, this.handleIncrmNeutral, this.handleIncrmBad]}
+            options={['good', 'neutral', 'bad']}
+            onLeaveFeedback={this.handleIncrm}
           />
         </Section>
 
         <Section title="Statistics">
-          {(this.state.good + this.state.neutral + this.state.bad) !== 0 ?
+          {(total) !== 0 ?
             <Statistics
               good={this.state.good}
               neutral={this.state.neutral}
               bad={this.state.bad}
-              total={this.state.good + this.state.neutral + this.state.bad}
-              positivePercentage={Math.round((this.state.good / (this.state.good + this.state.neutral + this.state.bad)) * 100)}
+              total={total}
+              positivePercentage={positive}
             />
             : <Notification message="There is no feedback"></Notification>}
         </Section>
